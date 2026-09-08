@@ -33,12 +33,22 @@ public class Coach : DomainEntity<Coach>
     {
         List<String>? skillNames = [.. newSkills]; // One time
         NotAllowedWhenThereAreDuplicateSkills();
+        NotAllowedIfAssignedCoursesWouldBecomeInvalid(); // Defect (4)
         OverwriteSkills();
         return this;
         void NotAllowedWhenThereAreDuplicateSkills()
         // Defect (3)
         // Here is loooop on newSkills (1 time)
             => skillNames.NoDuplicatesAllowed(a => new CoachAlreadyHasSkill(string.Join(",", a)));
+        void NotAllowedIfAssignedCoursesWouldBecomeInvalid() // Defect (4)!!!!!!!!!!
+        {
+            var newSkills = skillNames.Select(Skill.From).ToHashSet();
+            foreach (Course course in assignedCourses)
+            {
+                if (!course.RequiredSkills.All(newSkills.Contains))
+                    throw new CoachSkillUpdateWouldMakeAssignedCourseInvalid();
+            }
+        }
         void OverwriteSkills()
         {
             skills.Clear();
