@@ -50,10 +50,9 @@ public class Coach : DomainEntity<Coach>
         }
         void OverwriteSkills()
         {
+            List<Skill> validatedSkills = [.. skillNames.Select(Skill.From)];
             skills.Clear();
-            skillNames.Select(Skill.From) // here also looooop through newSkills (again) (((EMPTYYYY)))
-                .ToList()
-                .ForEach(a => skills.Add(a));
+            validatedSkills.ForEach(a => skills.Add(a));
         }
     }
 

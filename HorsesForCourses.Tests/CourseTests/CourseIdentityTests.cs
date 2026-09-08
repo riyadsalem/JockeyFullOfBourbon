@@ -2,7 +2,7 @@ using HorsesForCourses.Domain.Courses;
 
 namespace HorsesForCourses.Tests.CourseTests;
 
-public class CourseIdentityTests : TestHelpers
+public class CourseIdentityTests
 {
     [Fact]
     public void TwoCourses_With_TheSameNameAndPeriod_AreEqual()

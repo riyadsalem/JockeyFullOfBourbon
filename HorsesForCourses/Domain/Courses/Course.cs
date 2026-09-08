@@ -46,10 +46,14 @@ public class Course : DomainEntity<Course>
         // Defect (3)
             => skillNames.NoDuplicatesAllowed(a => new CourseAlreadyHasSkill(string.Join(",", a)));
         Course OverwriteRequiredSkills()
+        /* Validate all skills with Skill.From in validated skills before clearing the existing skill.... 
+        If any value is invalid... nothing changes (((either everything succeeds or NOTHING changes....)))
+        */
         {
+            List<Skill> validatedSkills = [.. skillNames.Select(Skill.From)];
             requiredSkills.Clear();
             // Use the stored skills instead of reading newSkills again
-            foreach (var s in skillNames.Select(Skill.From)) requiredSkills.Add(s);
+            foreach (Skill s in validatedSkills) requiredSkills.Add(s);
             return this;
         }
     }

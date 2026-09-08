@@ -30,3 +30,12 @@ I will also add tests to verify and prove that:
 * Two coaches with the same name and email are considered equal.
 * Two courses with the same name and period are considered equal.
 * Coaches or courses with different identifying values are correctly considered not equal.
+
+### Defect 6 – Skill Update Atomicity (DONE)
+
+Changed **`Coach.cs`** (`UpdateSkills`) and **`Course.cs`** (`UpdateRequiredSkills`) to validate all new skills into a separate list before clearing the existing skills.
+Previously, skills were cleared first and validated one by one, so an invalid value could throw an exception halfway through and leave the entity with partially updated skills.
+The update is now atomic: **either all skills are valid and the update succeeds, or nothing changes**.
+I will also add tests to verify that invalid skill values throw an exception and leave the existing skills unchanged for both `Coach` and `Course`.
+
+### Defect 7 – CoachCalendar.CoursesOverlap Edge Case (In Progress...)
