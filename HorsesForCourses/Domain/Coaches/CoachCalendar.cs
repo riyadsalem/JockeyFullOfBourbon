@@ -35,6 +35,8 @@ public class CoachCalendar(Coach coach)
 
         foreach (CourseDay day in Enum.GetValues(typeof(CourseDay)))
         {
+            // if this day is not within the overlap period, ignore it and do not check its TimeSlots...
+            if (!HasDay(start, end, day)) continue;
             if (!courseOneByDay.TryGetValue(day, out var slotsOne))
                 continue;
 
@@ -50,6 +52,20 @@ public class CoachCalendar(Coach coach)
         return false;
     }
 
+    private static readonly DayOfWeek[] DaysInOrder =
+    [DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday];
+
+    private static bool HasDay(DateOnly start, DateOnly end, CourseDay day)
+    {
+        DayOfWeek target = DaysInOrder[(int)day];
+        DateOnly current = start;
+        while (current <= end)
+        {
+            if (current.DayOfWeek == target) return true;
+            current = current.AddDays(1);
+        }
+        return false;
+    }
     private static Dictionary<CourseDay, List<TimeSlot>> GetTimeSlotsByDay(Course courseOne)
     {
         return courseOne.TimeSlots

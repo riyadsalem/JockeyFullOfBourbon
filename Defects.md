@@ -38,4 +38,11 @@ Previously, skills were cleared first and validated one by one, so an invalid va
 The update is now atomic: **either all skills are valid and the update succeeds, or nothing changes**.
 I will also add tests to verify that invalid skill values throw an exception and leave the existing skills unchanged for both `Coach` and `Course`.
 
-### Defect 7 – CoachCalendar.CoursesOverlap Edge Case (In Progress...)
+### Defect 7 – CoachCalendar.CoursesOverlap Edge Case (DONE)
+
+Changed **`CoachCalendar.cs`** inside `CoursesOverlap`.
+Previously, the code checked separately whether the course periods overlap and whether they have the same weekday with overlapping hours. It did not verify that the shared weekday actually occurs within the overlapping date range.
+This caused a false overlap when two periods only touched on a day that was not the shared weekday. For example, two courses could both have a Monday session while their periods only touch on a Sunday. The algorithm would report a conflict even though the Monday sessions are one week apart.
+Added `HasDay` to ensure the shared weekday actually occurs within the overlapping date range.
+I will also add a test to verify that this edge case returns no conflict, while real same-week conflicts are still detected correctly.
+
