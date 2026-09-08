@@ -28,10 +28,10 @@ public class Course : DomainEntity<Course>
         Period = Period.From(start, end);
     }
 
-    public static Course Create(string name, DateOnly start, DateOnly end)
-    {
-        return new Course(name, start, end);
-    }
+    public static Course Create(string name, DateOnly start, DateOnly end) => new(name, start, end);
+    public override bool Equals(object? obj) => obj is Course other && Name == other.Name && Period == other.Period;
+    public override int GetHashCode() => HashCode.Combine(Name, Period);
+
 
     void NotAllowedIfAlreadyConfirmed() { if (IsConfirmed) throw new CourseAlreadyConfirmed(); }
 

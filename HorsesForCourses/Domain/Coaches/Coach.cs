@@ -24,10 +24,9 @@ public class Coach : DomainEntity<Coach>
         Email = new CoachEmail(email);
     }
 
-    public static Coach Create(string name, string email)
-    {
-        return new(name, email);
-    }
+    public static Coach Create(string name, string email) => new(name, email);
+    public override bool Equals(object? obj) => obj is Coach other && Name == other.Name && Email == other.Email;
+    public override int GetHashCode() => HashCode.Combine(Name, Email);
 
     public virtual Coach UpdateSkills(IEnumerable<string> newSkills)
     {
