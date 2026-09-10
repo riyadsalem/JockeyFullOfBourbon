@@ -4,14 +4,16 @@ The domain models a lightweight training management system centered around **Coa
 
 ## Core Concepts
 
+`Coach` and `Course` are entities. Their equality is based on their **`Id`**, not on the descriptive properties listed below.
+
 ### Coach
-* Identified by **`CoachName`** and **`CoachEmail`**.
+* Has a **`CoachName`** and a **`CoachEmail`**.
 * Skills are a **set**: duplicates are rejected.
 * Suitability: a coach is suitable for a course only if they have **all required skills** of that course.
 * Availability: a coach is available if the new course **does not overlap** with any of their already assigned courses (period + timeslot overlap rules below).
 
 ### Course
-* Identified by **`CourseName`** and a **`Period`** (`Start`, `End`).
+* Has a **`CourseName`** and a **`Period`** (`Start`, `End`).
 * **TimeSlots**: one or more, each on a weekday in office hours (see constraints).
 * **No overlapping timeslots** within the same course.
 * **Confirmation** requires at least one timeslot. After confirmation, the course becomes **immutable** (no edits).
