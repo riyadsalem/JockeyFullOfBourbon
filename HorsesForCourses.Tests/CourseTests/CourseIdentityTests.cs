@@ -4,6 +4,8 @@ namespace HorsesForCourses.Tests.CourseTests;
 
 public class CourseIdentityTests
 {
+    /*
+    // Defect 4
     [Fact]
     public void TwoCourses_With_TheSameNameAndPeriod_AreEqual()
     {
@@ -19,4 +21,5 @@ public class CourseIdentityTests
         Course course2 = Course.Create("C#", new DateOnly(2026, 2, 1), new DateOnly(2026, 2, 28));
         Assert.NotEqual(course1, course2);
     }
+    */
 }

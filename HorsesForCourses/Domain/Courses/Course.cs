@@ -29,8 +29,11 @@ public class Course : DomainEntity<Course>
     }
 
     public static Course Create(string name, DateOnly start, DateOnly end) => new(name, start, end);
+
+    /* // Defet 4
     public override bool Equals(object? obj) => obj is Course other && Name == other.Name && Period == other.Period;
     public override int GetHashCode() => HashCode.Combine(Name, Period);
+    */
 
 
     void NotAllowedIfAlreadyConfirmed() { if (IsConfirmed) throw new CourseAlreadyConfirmed(); }

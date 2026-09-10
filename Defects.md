@@ -11,7 +11,8 @@ I will also add tests to verify and prove that the correct `CourseAlreadyConfirm
 Changed the implementation in **`Coach.cs`** so that `UpdateSkills` now checks whether the coach is currently assigned to any course before applying the change. If the new skills would no longer cover the required skills of an already assigned course, the update is rejected with a new exception, `CoachSkillUpdateWouldMakeAssignedCourseInvalid`. This ensures that a coach can never end up assigned to a course they are no longer suitable for, even through a valid sequence of otherwise correct operations (assign coach, then update their skills).
 I will also add tests to verify and prove that updating skills in a way that would invalidate an assigned course throws correctly, while updates that keep the coach suitable still succeed.
 
-### Defect 4 – Coach/Course Identity Equality (DONE)
+### Defect 4 – Coach/Course Identity Equality (REVERTED)
+`......All code was commented out before starting the Persistency Testing......`
 Added `Equals`/`GetHashCode` overrides to both **`Coach.cs`** and **`Course.cs`**.
 Previously, neither class defined its own equality, so both inherited the base **`DomainEntity<T>`** equality, which compares entities by `Id`. Since this project has no persistence, every entity's `Id` stays empty forever. This meant that two entities were never considered equal, even when they had identical data.
 This contradicted the requirements, which state that a **Coach is identified by `CoachName` and `CoachEmail`**, while a **Course is identified by `CourseName` and `Period`**.
