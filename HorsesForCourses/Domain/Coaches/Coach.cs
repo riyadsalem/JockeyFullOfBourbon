@@ -33,7 +33,7 @@ public class Coach : DomainEntity<Coach>
     public override int GetHashCode() => HashCode.Combine(Name, Email);
     */
 
-    public virtual Coach UpdateSkills(IEnumerable<string> newSkills)
+    public Coach UpdateSkills(IEnumerable<string> newSkills)
     {
         List<String>? skillNames = [.. newSkills]; // One time
         NotAllowedWhenThereAreDuplicateSkills();
