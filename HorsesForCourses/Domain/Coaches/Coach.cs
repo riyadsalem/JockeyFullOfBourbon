@@ -18,6 +18,8 @@ public class Coach : DomainEntity<Coach>
     public IReadOnlyList<Course> AssignedCourses => assignedCourses.AsReadOnly();
     private readonly List<Course> assignedCourses = [];
 
+    // Required by Ef Core to materialize a Coach when loading from the database.
+    private Coach() { }
     private Coach(string name, string email)
     {
         Name = new CoachName(name);

@@ -22,6 +22,7 @@ public class Course : DomainEntity<Course>
     public bool IsConfirmed { get; private set; }
     public Coach? AssignedCoach { get; private set; }
 
+    private Course() { }
     private Course(string name, DateOnly start, DateOnly end)
     {
         Name = new CourseName(name);

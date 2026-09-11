@@ -7,11 +7,11 @@ public class CourseImmutabilityTests : TestHelpers
 {
     [Fact]
     public void UpdatingSkills_On_ConfirmedCourse_Throws_CourseAlreadyConfirmed() =>
-    Assert.Throws<CourseAlreadyConfirmed>(() => CreateConfirmedCourse().UpdateRequiredSkills(["C#"]));
+        Assert.Throws<CourseAlreadyConfirmed>(() => CreateConfirmedCourse().UpdateRequiredSkills(["C#"]));
 
     [Fact]
     public void UpdatingTimeSlots_On_ConfirmedCourse_Throws_CourseAlreadyConfirmed() =>
-    Assert.Throws<CourseAlreadyConfirmed>(() => CreateConfirmedCourse().UpdateTimeSlots([(CourseDay.Thursday, 9, 10)], t => t));
+        Assert.Throws<CourseAlreadyConfirmed>(() => CreateConfirmedCourse().UpdateTimeSlots([(CourseDay.Thursday, 9, 10)], t => t));
 
     [Fact]
     // Even When the new data is invalid, a confirmed course must reject the change becausse it is already confirmed....
